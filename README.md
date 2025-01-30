@@ -109,18 +109,19 @@ Welcome T4G Dev Team! To get started, please follow these steps:
 ### Using Command Line
 1. Fork the repository: Go to the repository on GitHub and click the "Fork" button. This will create a copy of the repository under your own GitHub account.
 2. Clone your fork to your machine: `git clone https://github.com/<YOUR USERNAME>/t4g_redteam_deepseek.git` (This creates a local copy)
-3. Create a new branch: `git checkout -b <branch name>`(Branch name should describe what you are changing) (Creating a branch for each feature or update is best practice)
 4. Make your changes or add new features.
-5. Check to make sure you have the most recent version of main. `git pull origin main` (This prevents conflicting versions of main in pull requests)
-6. Stage you changes: `git add .` (This adds all modified files. Optionally, you may select only specific files.) 
-7. Commit your changes: `git commit -m '<DESCRIPTION>'` 
-8. Push to your fork: `git push origin <BRANCH-NAME>` (This adds your changes to your own copy of the repository)
-9. Open a pull request: Go to GitHub and select pull request (This pulls your changes into the main copy of the repo)
+5. Sync your fork. On the github page for your fork, there should be a "Sync Fork" option. Make sure to do this before running git pull!
+6. Check to make sure you have the most recent version of main. `git pull origin main` (This prevents conflicting versions of main in pull requests)
+7. Stage you changes: `git add .` (This adds all modified files. Optionally, you may select only specific files.) 
+8. Commit your changes: `git commit -m '<DESCRIPTION>'` 
+9. Push to your fork: `git push`
+10. Open a pull request: Go to GitHub and select pull request (This pulls your changes into the main copy of the repo)
+
+Helpful tip: If you are unsure what branch you are on, you can run `git branch` to see what branch you are currently on.
 
 ### Using Github Desktop
 1. Fork the repository on the GitHub website. (This creates your own personal copy)
 2. Clone your fork to GitHub desktop. Click on File -> Clone Repository (This pulls it to your machine)
-3. Create a new branch. Select CurrentBranch -> New Branch (Best practice)
 4. Make your changes.
 5. Check to make sure you have the most recent version of main: Select Fetch Origin in Github desktop (This prevents conflicting versions of main in pull requests)
 6. Commit your changes. Open GitHub desktop and you will see the changes on the left hand side. Select the files to add and select Commit. 
