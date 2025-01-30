@@ -5,7 +5,7 @@ class Log:
     class to log prompts/outputs to create a dataset
     """
     def __init__(self):
-        self.df = pd.Dataframe()
+        self.df = pd.DataFrame()
     
     def add_attempt(self, prompt: str,output: str,score: str,toxic: int):
         """Adds jailbreaking attempt to dataset

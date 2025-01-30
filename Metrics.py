@@ -5,7 +5,7 @@ class Metrics:
     def __init__(self):
         pass
     
-    def toxicity_score(output: Str)-> float:
+    def toxicity_score(self, output: str)-> float:
         """Generate toxicity score for model output
 
         Args:
@@ -14,3 +14,4 @@ class Metrics:
         Returns:
             float: Toxicity score
         """
+        return 0

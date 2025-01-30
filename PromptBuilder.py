@@ -1,3 +1,5 @@
+import base64
+
 class PromptBuilder:
     """
     Class to engineer prompts
@@ -15,7 +17,8 @@ class PromptBuilder:
         Returns:
             str: Base64 encoded prompt
         """
-        
+        return base64.b64encode(prompt.encode("utf-8"))
+
     def add_details(self, prompt: str)-> str:
         """Adds details to prompt
 
@@ -25,6 +28,7 @@ class PromptBuilder:
         Returns:
             str: Orginial prompt with details appended
         """
+        return None
     
     def translate(self, prompt: str, language: str)->str:
         """Translates english prompt to another language
@@ -37,3 +41,4 @@ class PromptBuilder:
             str: Original prompt translated 
         """
         #add exception if language not found
+        return None

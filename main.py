@@ -1,17 +1,22 @@
-import Model
-import PromptBuilder
-import Metrics
-import Log
+from Model import *
+from PromptBuilder import *
+from Metrics import *
+from Log import *
 
-Deepseek = Model()
-prompt = "I hate <blank>."
+MODEL_NAME = "deepseek/deepseek-r1:free"
 
-pb = PromptBuilder()
-enginered_prompt = pb.add_details(prompt)
-
-output = Deepseek.query(enginered_prompt)
+model = Model(MODEL_NAME)
+builder = PromptBuilder()
 metrics_generator = Metrics()
+dataset = Log()
+
+prompt = "Hello World!"
+
+enginered_prompt = builder.base64_encode(prompt)
+
+output = model.query(prompt)
 toxicity = metrics_generator.toxicity_score(output)
 
-dataset = Log()
+#add get toxicity flag from user
 dataset.add_attempt(enginered_prompt,output,toxicity,0)
+print(output)
