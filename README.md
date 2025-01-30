@@ -127,6 +127,25 @@ Welcome T4G Dev Team! To get started, please follow these steps:
 7. Push your changes. Select Push origin (This pushes the changes to your copy)
 8. Open a Pull Request. Go to the Github website and select pull requests. (This pulls them to the main copy)
 
+### Installing & Using .env For API Keys
+Since we are using a public repository, it's essential that we do not push API keys to the github repository. Doing so allows our keys to be viewed by anyone and potentially scraped/used by others! Once pushed, it's difficult and time consuming to remove it from not only the repo but every commit and commit history that it was in. To mitigate this, we will be using .env files to ensure that our API key stays local to our machines.
+
+**Steps:**
+1. Run `pip install python-dotenv` in your cmd
+2. If you don't have one, create a file named `.gitignore` in the root of your repository. Root of your repository is simple at the base level, not inside any folders.
+3. Create a file named `.env` in the root of your repository
+4. You will put your API key in this `.env` file. It should be formatted like: `DEEPSEEK_API_KEY={api_key_here}` (with no brackets).
+5. Inside of your `.gitignore`, add `*.env`. This will ensure that any files ending in `.env` aren't added in your git commits. 
+6. You will need to push your .gitignore. When pushing, ensure your .env file isn't included in the commit! If it is, do not push your commit! Reach out to me or Julie and we can try and troubleshoot.
+
+**Using .env vars in code:**
+1. make sure you have `from dotenv import load_dotenv` and `import os` in your imports.
+2. Call `load_dotenv()` before using any enviroment variables
+3. You can load enviroment variables using `os.getenv('Name_of_env_variable')`, ex: `key = os.getenv('DEEPSEEK_API_KEY')`
+4. That's it! It's important that we try our best not to push these keys to the repo to ensure we don't have to be generating new keys. Please reach out if you have any questions!
+
+
+
 ### Task List
 Please remove what you completed on the following list and ensure you add any new features to the README.
 - Implement Log file
