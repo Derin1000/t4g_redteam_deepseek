@@ -1,7 +1,11 @@
 from Model import *
+import os
 from PromptBuilder import *
 from Metrics import *
 from Log import *
+from dotenv import load_dotenv
+
+load_dotenv()
 
 MODEL_NAME = "deepseek/deepseek-r1:free"
 
