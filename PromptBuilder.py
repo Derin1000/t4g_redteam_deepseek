@@ -1,3 +1,4 @@
+from Translator import *
 import base64
 
 class PromptBuilder:
@@ -5,8 +6,8 @@ class PromptBuilder:
     Class to engineer prompts
     """
     
-    def __init__(self):
-        pass
+    def __init__(self, translator):
+        self.translator = translator
     
     def base64_encode(self, prompt: str)->str:
         """Encodes prompt in base64
@@ -31,14 +32,5 @@ class PromptBuilder:
         return None
     
     def translate(self, prompt: str, language: str)->str:
-        """Translates english prompt to another language
-
-        Args:
-            prompt (str): Prompt to translate
-            language (str): Language to translate to
-
-        Returns:
-            str: Original prompt translated 
-        """
-        #add exception if language not found
-        return None
+        source_lang = "EN"
+        return self.translator.translate(source_lang, language, prompt)
