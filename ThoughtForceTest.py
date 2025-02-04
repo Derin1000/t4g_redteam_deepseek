@@ -2,6 +2,9 @@ from Deepseek_Setup import *
 from deepl_fetch import *
 from dotenv import load_dotenv
 import os
+import unittest
+import pandas as pd
+from Log import Log
 
 load_dotenv()
 

@@ -31,4 +31,5 @@ toxicity = metrics_generator.toxicity_score(output)
 
 #add get toxicity flag from user
 dataset.add_attempt(enginered_prompt,output,toxicity,0)
+dataset.write_to_file("log.csv")
 print(output)
