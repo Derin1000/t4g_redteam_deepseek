@@ -40,6 +40,8 @@ class model_initialization:
         thinking_tokens = tokenizer.encode(thinking_message, add_special_tokens=False)
         return[[token_ids['BOS']] + user_tokens + [token_ids['NEWLINE']] + [token_ids["THINK_START"]] + thinking_tokens]
     
+
+    
     def get_result(self, encoded_message, model, tokenizer):
         input_ids = torch.tensor(encoded_message).to(model.device)
         attention_mask = torch.ones_like(input_ids).to(model.device)
@@ -47,7 +49,7 @@ class model_initialization:
             outputs = model.generate(
                 input_ids,
                 attention_mask=attention_mask,
-                max_length=1000,
+                max_length=200,
                 do_sample=False,
                 temperature=None,
                 top_p=None,
