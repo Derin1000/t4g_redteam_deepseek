@@ -8,7 +8,7 @@ class PromptBuilder:
     
     def __init__(self, translator):
         self.translator = translator
-        self.valid_flags = ["base64_encode", "translate"]
+        self.valid_flags = ["base64_encode", "translate", "simple_attack"]
     
     def base64_encode(self, prompt: str)->str:
         """Encodes prompt in base64
@@ -167,6 +167,9 @@ class PromptBuilder:
         # step 2: go thru flags, apply prompts step by step
         for flag in attack_flags:
             match flag:
+                case "simple_attack":
+                    prompt_type = input("input simple attack type: ")
+                    engineered_prompt = self.simple_attack(engineered_prompt, prompt_type)
                 case "translate":
                     target_lang = input("input a target language: ")
                     engineered_prompt = self.translate(engineered_prompt, target_lang)
