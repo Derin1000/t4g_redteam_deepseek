@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from openai import OpenAI
-
+import os
 class Model:
     """_summary_
     """
@@ -15,10 +15,9 @@ class Model:
     def __init__(self, model: str):
         self.client = OpenAI(
             base_url="https://openrouter.ai/api/v1",
-            api_key= "super_secret_key",
+            api_key= os.getenv("DEEPSEEK_API_KEY"),
         )
         self.model = model
-        return 
     
     def query(self, prompt: str) -> str:
         """Queries model with a prompt
