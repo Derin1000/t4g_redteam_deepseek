@@ -1,4 +1,4 @@
-from Model import *
+#from Model import *
 import os
 from PromptBuilder import *
 from Metrics import *
@@ -12,7 +12,7 @@ MODEL_NAME = "deepseek/deepseek-r1:free"
 DEEPL_KEY = os.getenv("DEEPL_API_KEY")
 DEEPL_URL = "https://api-free.deepl.com/v2/translate"
 
-model = Model(MODEL_NAME)
+#model = Model(MODEL_NAME)
 translator = Translator(DEEPL_KEY, DEEPL_URL)
 builder = PromptBuilder(translator)
 metrics_generator = Metrics()
@@ -20,11 +20,11 @@ dataset = Log()
 
 prompt = "Hello World!"
 
-engineered_prompt = builder.translate(prompt, "ZH")
+attack_one = builder.attack(prompt, ["base64_encode", "translate"])
 
-print(engineered_prompt)
+print(attack_one)
 
-enginered_prompt = builder.base64_encode(prompt)
+
 
 output = model.query(prompt)
 toxicity = metrics_generator.toxicity_score(output)

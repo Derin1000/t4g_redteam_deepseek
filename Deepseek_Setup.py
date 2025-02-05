@@ -49,14 +49,14 @@ class model_initialization:
             outputs = model.generate(
                 input_ids,
                 attention_mask=attention_mask,
-                max_length=200,
+                max_length=1000,
                 do_sample=False,
                 temperature=None,
                 top_p=None,
                 pad_token_id=tokenizer.pad_token_id,
                 eos_token_id=tokenizer.eos_token_id
             )
-        generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
+        generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
         return generated_text
 
 
