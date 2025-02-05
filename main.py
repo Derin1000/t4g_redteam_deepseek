@@ -22,7 +22,7 @@ dataset = Log()
 
 prompt = "Hello World!"
 
-attack_one = builder.attack(prompt, ["translate", "simple_attack"])
+attack_one = builder.attack(prompt, ["refusal_supression", "add_profession"])
 
 print(attack_one)
 
