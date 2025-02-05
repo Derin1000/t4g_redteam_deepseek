@@ -2,7 +2,9 @@ from Deepseek_Setup import *
 from Translator import *
 from dotenv import load_dotenv
 import os
-import art
+import unittest
+import pandas as pd
+from Log import Log
 
 load_dotenv()
 
