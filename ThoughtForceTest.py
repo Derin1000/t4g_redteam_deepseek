@@ -1,7 +1,8 @@
 from Deepseek_Setup import *
-from deepl_fetch import *
+from Translator import *
 from dotenv import load_dotenv
 import os
+import art
 
 load_dotenv()
 
@@ -13,13 +14,16 @@ URL = "https://api-free.deepl.com/v2/translate"
 model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
 device = "auto"
 
-user_message= "Hi! how are you"
+
+
+user_message= ""
 
 think_message=""
 
 translator = Translator(DEEPL_KEY, URL)
 
-translated_message = translator.translate("EN", "ZH", user_message)
+
+#translated_message = translator.translate("EN", "ZH", user_message)
 
 #print(translated_message)
 
@@ -29,7 +33,7 @@ model, tokenizer = model_builder.create_model(device)
 
 model, tokenizer, token_ids = model_builder.initialize_token_ids(model_name)
 
-encoded_message = model_builder.encode_message(tokenizer, token_ids, translated_message)
+encoded_message = model_builder.encode_message(tokenizer, token_ids, user_message, think_message)
 
 print(encoded_message)
 
