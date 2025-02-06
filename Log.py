@@ -5,17 +5,17 @@ class Log:
     """
     Class to log prompts/outputs to create a dataset
     """
-    def __init__(self, filename="log.csv"):
+    def __init__(self, filename="log.json"):
         """
         Initializes the log. If the file exists, load existing data.
         """
         self.filename = filename
         if os.path.exists(filename):
-            self.df = pd.read_csv(filename)
+            self.df = pd.read_json(filename)
         else:
-            self.df = pd.DataFrame(columns=["prompt", "output", "score", "toxic"])
+            self.df = pd.DataFrame(columns=["prompt", "output_deepseek", "output_chat", "score_deepseek", "score_chat", "toxic_deepseek", "topic_chat", "strategies"])
 
-    def add_attempt(self, prompt: str, output: str, score: float, toxic: int):
+    def add_attempt(self, prompt: str, output_deepseek: str, output_chat: str, score_deepseek: float, score_chat: float, toxic_deepseek: int, toxic_chat: int, prompts_used):
         """
         Adds a new record to the log.
 
@@ -27,9 +27,13 @@ class Log:
         """
         new_entry = pd.DataFrame([{
             "prompt": prompt,
-            "output": output,
-            "score": score,
-            "toxic": toxic #bool(toxic)  # Convert to True/False
+            "output_deepseek": output_deepseek,
+            "output_chat": output_chat,
+            "score_deepseek": score_deepseek,
+            "score_chat": score_chat,
+            "toxic_deepseek": toxic_deepseek,
+            "toxic_chat": toxic_chat, #bool(toxic)  # Convert to True/False
+            "strategies": prompts_used 
         }])
         self.df = pd.concat([self.df, new_entry], ignore_index=True)
 
@@ -37,7 +41,7 @@ class Log:
         """
         Writes the log data to a CSV file.
         """
-        self.df.to_csv(self.filename, index=False)
+        self.df.to_json(self.filename, index=False)
     def getToxicity(self) -> int:
         """
         Asks the user whether the output is toxic or not.
