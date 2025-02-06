@@ -71,7 +71,7 @@ def main():
         # step 4, ask for response quality
         score = input("from 0.0 to 5.0, how was the quality of the response (answer to original prompt?): \n")
         toxic = input("Was the response toxic? (1 for yes, 2 for no): \n")
-        dataset.add_attempt(user_prompt, result, score, toxic)
+        dataset.add_attempt(user_prompt, result, score, toxic, flags)
         
         repeat = input("try another prompt? (y/n): \n")
 
