@@ -8,13 +8,12 @@ from Translator import *
 load_dotenv()
 
 #MODEL_NAME = "deepseek/deepseek-r1:free"
-MODEL_NAME = "deepseek/deepseek-r1-distill-llama-70b:free"
+MODEL_NAME = "deepseek/deepseek-r1:nitro"
 LOCAL_MODEL_NAME = "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
 LOCAL_DEVICE = "auto"
 
 DEEPL_KEY = os.getenv("DEEPL_API_KEY")
 DEEPL_URL = "https://api-free.deepl.com/v2/translate"
-MISTRAL_KEY = os.getenv("MISTRAL_API_KEY")
 
 model = Model(MODEL_NAME)
 translator = Translator(DEEPL_KEY, DEEPL_URL)
