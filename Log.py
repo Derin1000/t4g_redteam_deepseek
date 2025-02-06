@@ -13,9 +13,9 @@ class Log:
         if os.path.exists(filename):
             self.df = pd.read_json(filename)
         else:
-            self.df = pd.DataFrame(columns=["prompt", "output", "score", "toxic"])
+            self.df = pd.DataFrame(columns=["prompt", "output", "score", "toxic", "strategies"])
 
-    def add_attempt(self, prompt: str, output: str, score: float, toxic: int):
+    def add_attempt(self, prompt: str, output: str, score: float, toxic: int, prompts_used):
         """
         Adds a new record to the log.
 
@@ -29,7 +29,8 @@ class Log:
             "prompt": prompt,
             "output": output,
             "score": score,
-            "toxic": toxic #bool(toxic)  # Convert to True/False
+            "toxic": toxic, #bool(toxic)  # Convert to True/False
+            "strategies": prompts_used 
         }])
         self.df = pd.concat([self.df, new_entry], ignore_index=True)
 
