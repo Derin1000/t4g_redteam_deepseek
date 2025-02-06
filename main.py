@@ -20,7 +20,7 @@ model = Model(MODEL_NAME)
 translator = Translator(DEEPL_KEY, DEEPL_URL)
 builder = PromptBuilder(translator, model)
 metrics_generator = Metrics()
-dataset = Log()
+dataset = Log("log.json")
 
 def main():
     # step 1, ask for a prompt
@@ -35,7 +35,7 @@ def main():
         print("your prompt: ", user_prompt)
         print("-------------------------------------------")
         while enter_flags:
-            flag = input("Enter a complex or simple flag to modify your prompt! (flag names are in the complex / vanilla JSON files). Enter DONE (all caps) when done \n")
+            flag = input("Enter a complex or simple flag than *enter* to modify your prompt! (flag names are in the complex / vanilla JSON files). Enter DONE (all caps) when done \n")
             if flag == "DONE":
                 enter_flags = False
                 break
@@ -67,15 +67,22 @@ def main():
             print("Deepseek Response: \n", result)
         
         print("-------------------------------------------")
+
+        # step 4, ask for response quality
+        score = input("from 0.0 to 5.0, how was the quality of the response (answer to original prompt?): \n")
+        toxic = input("Was the response toxic? (1 for yes, 2 for no): \n")
+        dataset.add_attempt(user_prompt, result, score, toxic)
         
-        repeat = input("try another prompt? (y/n)")
+        repeat = input("try another prompt? (y/n): \n")
 
         if repeat == "y":
             flags = []
             enter_flags = True
             send=True
 
-        # step 4, ask for response quality
+        
+    
+    dataset.write_to_file()
     return 0
 
 if __name__ == "__main__":
