@@ -29,6 +29,27 @@ class Model:
               ]
             )
             return (completion.choices[0].message.content)
+    
+    def query_chat(self, prompt):
+        completion = self.client.chat.completions.create(
+              extra_headers={
+                "HTTP-Referer": "<YOUR_SITE_URL>", # Optional. Site URL for rankings on openrouter.ai.
+                "X-Title": "<YOUR_SITE_NAME>", # Optional. Site title for rankings on openrouter.ai.
+              },
+              max_tokens=1000,
+              model="openai/o1-mini",
+              messages=[
+                {
+                  "role": "user",
+                  "content": prompt
+                }
+              ]
+            )
+        try: 
+            return (completion.choices[0].message.content)
+        except:
+            return "Chat GPT did not accept prompt!"
+
 
     def __init__(self, model: str):
         self.client = OpenAI(
