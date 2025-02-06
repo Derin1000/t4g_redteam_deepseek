@@ -5,13 +5,13 @@ class Log:
     """
     Class to log prompts/outputs to create a dataset
     """
-    def __init__(self, filename="log.csv"):
+    def __init__(self, filename="log.json"):
         """
         Initializes the log. If the file exists, load existing data.
         """
         self.filename = filename
         if os.path.exists(filename):
-            self.df = pd.read_csv(filename)
+            self.df = pd.read_json(filename)
         else:
             self.df = pd.DataFrame(columns=["prompt", "output", "score", "toxic"])
 
@@ -37,7 +37,7 @@ class Log:
         """
         Writes the log data to a CSV file.
         """
-        self.df.to_csv(self.filename, index=False)
+        self.df.to_json(self.filename, index=False)
     def getToxicity(self) -> int:
         """
         Asks the user whether the output is toxic or not.
