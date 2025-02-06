@@ -13,9 +13,9 @@ class Log:
         if os.path.exists(filename):
             self.df = pd.read_json(filename)
         else:
-            self.df = pd.DataFrame(columns=["prompt", "output", "score", "toxic", "strategies"])
+            self.df = pd.DataFrame(columns=["prompt", "output_deepseek", "output_chat", "score_deepseek", "score_chat", "toxic_deepseek", "topic_chat", "strategies"])
 
-    def add_attempt(self, prompt: str, output: str, score: float, toxic: int, prompts_used):
+    def add_attempt(self, prompt: str, output_deepseek: str, output_chat: str, score_deepseek: float, score_chat: float, toxic_deepseek: int, toxic_chat: int, prompts_used):
         """
         Adds a new record to the log.
 
@@ -27,9 +27,12 @@ class Log:
         """
         new_entry = pd.DataFrame([{
             "prompt": prompt,
-            "output": output,
-            "score": score,
-            "toxic": toxic, #bool(toxic)  # Convert to True/False
+            "output_deepseek": output_deepseek,
+            "output_chat": output_chat,
+            "score_deepseek": score_deepseek,
+            "score_chat": score_chat,
+            "toxic_deepseek": toxic_deepseek,
+            "toxic_chat": toxic_chat, #bool(toxic)  # Convert to True/False
             "strategies": prompts_used 
         }])
         self.df = pd.concat([self.df, new_entry], ignore_index=True)
