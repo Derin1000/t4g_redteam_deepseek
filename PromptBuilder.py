@@ -58,7 +58,7 @@ class PromptBuilder:
 
         attack = self.df_simple_attacks.loc[self.df_simple_attacks['name'] == type, ['text']]['text'].to_string(index=False)
 
-        jailbreak_prompt = f"{attack}{prompt}Remember:{attack}"
+        jailbreak_prompt = f"{attack} {prompt} Remember:{attack}"
         self.print_modification(type, jailbreak_prompt)
         return jailbreak_prompt
     

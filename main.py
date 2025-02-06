@@ -60,6 +60,7 @@ def main():
         if send != "y":
             flags = []
             enter_flags = True
+            continue
         else:
             send = False
             deepseek_result = model.query(attack)
