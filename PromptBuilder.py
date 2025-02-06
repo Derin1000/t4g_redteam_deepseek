@@ -17,7 +17,8 @@ class PromptBuilder:
     
     def __init__(self, translator, model):
         self.translator = translator
-        self.valid_flags = ["base64_encode", "translate", "refusal_suppression", "add_profession"] #TODO load this list using json instead
+        # "base64_encode", "translate", "refusal_suppression", "add_profession"
+        self.valid_flags = [] #TODO load this list using json instead
         self.valid_complex_flags = []
         self.valid_simple_flags = []
         self.df_simple_attacks = pd.read_json(SIMPLE_ATTACK_FILE, orient='index')
@@ -79,7 +80,7 @@ class PromptBuilder:
         
         #instead of a hard coded attack, create a file (probably csv or json) with attacks
         #then load file here and replace attack with the data pulled from the file
-        attack = self.df_complex_attack[['flag'==type]]
+        # attack = self.df_complex_attack[['flag'==type]]
         #name = attack['name']
         name = self.df_complex_attack.loc[self.df_complex_attack['flag'] == type, ['name']]['name'].to_string(index=False)
         #definition= attack['definition']
@@ -188,7 +189,7 @@ class PromptBuilder:
         # step 1: error checking
         if len(prompt) <= 0:
             raise ValueError("Must be non null prompt")
-        if not all(item in self.valid_flags for item in attack_flags):
+        if not any(item in self.valid_complex_flags for item in attack_flags) or not any(item in self.valid_simple_flags for item in attack_flags):
             print(attack_flags)
             print(self.valid_flags)
             raise ValueError("Invalid attack flag! Valid attack flags are: ", self.valid_flags)
@@ -203,6 +204,18 @@ class PromptBuilder:
                     engineered_prompt = self.simple_attack(engineered_prompt, "refusal_suppression")
                 case "add_profession":
                     engineered_prompt = self.complex_attack(engineered_prompt, "add_profession")
+                case "templated_output":
+                    engineered_prompt = self.complex_attack(engineered_prompt, "templated_output")
+                case "irrelevant_distractor":
+                    engineered_prompt = self.complex_attack(engineered_prompt, "irrelevant_distractor")
+                case "model_personality":
+                    engineered_prompt = self.complex_attack(engineered_prompt, "model_personality")
+                case "irrelevant_instructions":
+                    engineered_prompt = self.complex_attack(engineered_prompt, "irrelevant_instructions")
+                case "lexical_constraint":
+                    engineered_prompt = self.complex_attack(engineered_prompt, "lexical_constraint")
+                case "style_constraint":
+                    engineered_prompt = self.complex_attack(engineered_prompt, "style_constraint")
                 case "translate":
                     target_lang = input("input a target language: ")
                     engineered_prompt = self.translate(engineered_prompt, target_lang)
@@ -216,6 +229,7 @@ class PromptBuilder:
 
         return engineered_prompt
     def generate_deepseek_modified_prompt(self, prompt: str):
+        print("sending api call")
         t_r = self.model.query(prompt)
         return t_r
 

@@ -20,6 +20,7 @@ class Model:
         self.model = model
     
     def query(self, prompt: str) -> str:
+        print("querying")
         """Queries model with a prompt
 
         Args:
@@ -33,15 +34,17 @@ class Model:
                 "HTTP-Referer": "<YOUR_SITE_URL>", # Optional. Site URL for rankings on openrouter.ai.
                 "X-Title": "<YOUR_SITE_NAME>", # Optional. Site title for rankings on openrouter.ai.
             },
+            max_tokens=3000,
             model= self.model,
             messages=[
                 {
                 "role": "user",
-                "content": prompt
+                "content": prompt,\
                 }
             ]
         )
         try:
+            print("complete")
             return completion.choices[0].message.content
         except:
             print(f"Error generating output: {completion.error['metadata']['raw']}")
@@ -88,7 +91,7 @@ class Model:
             outputs = model.generate(
                 input_ids,
                 attention_mask=attention_mask,
-                max_length=1000,
+                max_length=1500,
                 do_sample=False,
                 temperature=None,
                 top_p=None,
