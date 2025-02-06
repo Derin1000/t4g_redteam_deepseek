@@ -11,6 +11,29 @@ class Model:
         self.ds_model, self.ds_tokenizer, self.ds_token_ids = self.initialize_token_ids()
 
         return self.ds_model, self.ds_tokenizer, self.ds_token_ids
+    
+    def query_mistral(self, api_key, prompt):
+
+            client = OpenAI(
+              base_url="https://openrouter.ai/api/v1",
+              api_key=api_key,
+            )
+
+            completion = client.chat.completions.create(
+              extra_headers={
+                "HTTP-Referer": "<YOUR_SITE_URL>", # Optional. Site URL for rankings on openrouter.ai.
+                "X-Title": "<YOUR_SITE_NAME>", # Optional. Site title for rankings on openrouter.ai.
+              },
+              max_tokens=1000,
+              model="mistralai/mistral-7b-instruct:free",
+              messages=[
+                {
+                  "role": "user",
+                  "content": prompt
+                }
+              ]
+            )
+            return (completion.choices[0].message.content)
 
     def __init__(self, model: str):
         self.client = OpenAI(
