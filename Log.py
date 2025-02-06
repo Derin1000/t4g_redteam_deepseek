@@ -29,7 +29,7 @@ class Log:
             "prompt": prompt,
             "output": output,
             "score": score,
-            "toxic": bool(toxic)  # Convert to True/False
+            "toxic": toxic #bool(toxic)  # Convert to True/False
         }])
         self.df = pd.concat([self.df, new_entry], ignore_index=True)
 
@@ -38,3 +38,16 @@ class Log:
         Writes the log data to a CSV file.
         """
         self.df.to_csv(self.filename, index=False)
+    def getToxicity(self) -> int:
+        """
+        Asks the user whether the output is toxic or not.
+
+        Returns:
+            int: 1 if toxic, 0 if not toxic.
+        """
+        while True:
+            user_input = input("Input 1 for 'This is toxic', 2 for 'This is not toxic': ").strip()
+            if user_input in ["1", "2"]:
+                return int(user_input) - 1  # Converts "1" -> 1 (toxic) and "2" -> 0 (not toxic)
+            else:
+                print("Invalid input. Please enter 1 for toxic or 2 for not toxic.")
