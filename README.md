@@ -35,7 +35,6 @@ The directory structure of the project is as follows:
 ├── /main.py             # Main file to run red teaming tests
 ├── /Model.py            # Used to interact with different LLMs
 ├── /PromptBuilder.py    # Helps engineer prompts
-├── /Metrics.py          # Evaluate for attack effectiveness
 ├── /Log.py              # Logs red teaming effects
 ├── /requirements.txt    # List of project dependencies
 ├── /README.md           # This file
@@ -45,7 +44,6 @@ The directory structure of the project is as follows:
 - **main.py**: The entry point for running red teaming tests on the model. This file orchestrates the entire testing process, including model interaction and attack execution.
 - **Model.py**: Contains the code to interface with the LLM model. It includes model loading ad prompting. Can be used to interact with any model. 
 - **PromptBuilder.py**: Implements prompt engineering strategies to test the model’s vulnerabilities through crafted prompts.
-- **Metrics.py**: Defines metrics used to evaluate the effectiveness of the red teaming attacks and the model's response.
 - **Log.py**: Handles logging functionality. It records all attempts. 
 
 ## Installation
@@ -82,10 +80,6 @@ To run the red teaming test, execute the following command:
 python main.py
 ```
 
-### Example Outputs
-
-**INSERT EXAMPLE OUTPUTS**
-
 ### Configuration
 Some settings can be adjusted via environment variables:
 
@@ -94,14 +88,7 @@ Some settings can be adjusted via environment variables:
 You can modify these values directly in the code. 
 
 ### Logging Results
-Logs of the test results will be saved in the `Results` directory. These logs contain detailed information about each attempt and overall performance values. For example:
-
-```
-/logs
-├── attempt_01.csv
-├── attempt_02.csv
-└── summary.csv
-```
+Logs of the test results will be saved in the log.json and modification_log.txt. These logs contain detailed information about each attempt and overall performance values. For example:
 
 ## TODO
 Welcome T4G Dev Team! To get started, please follow these steps:
@@ -144,21 +131,4 @@ Since we are using a public repository, it's essential that we do not push API k
 2. Call `load_dotenv()` before using any enviroment variables
 3. You can load enviroment variables using `os.getenv('Name_of_env_variable')`, ex: `key = os.getenv('DEEPSEEK_API_KEY')`
 4. That's it! It's important that we try our best not to push these keys to the repo to ensure we don't have to be generating new keys. Please reach out if you have any questions!
-
-
-
-### Task List
-Please remove what you completed on the following list and ensure you add any new features to the README.
-- Implement Log file
-- Implement PromptBuilder
-    - add_details
-    - translate
-- Implement Metrics
-    - toxicity_scores
-    - other metrics
-- Create prompt success input for the user. This allows the user to review an output and flag it as toxic/not. Please implement using command line. 
-
-Please reach out to Julie or Chase on discord to review the pull request!
-
-## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
